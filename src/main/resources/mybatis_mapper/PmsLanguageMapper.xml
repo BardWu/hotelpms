@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="PmsLanguage">
+
+	<!--check in-->
+	<select id="select" parameterType="CloudMessage">
+		insert into pms_cloud_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid !=null and uuid != ''">
+				uuid,
+			</if>
+			<if test="requestMessage !=null and requestMessage != ''">
+				requestMessage,
+			</if>
+			<if test="responseMessage !=null and responseMessage != ''">
+				responseMessage,
+			</if>
+			<if test="status !=null and status != ''">
+				status,
+			</if>
+			<if test="errorReason !=null and errorReason != ''">
+				errorReason,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+
+			<if test="uuid !=null and uuid != ''">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="requestMessage !=null and requestMessage != ''">
+				#{requestMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="responseMessage !=null and responseMessage != ''">
+				#{responseMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="status !=null and status != ''">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="errorReason !=null and errorReason != ''">
+				#{errorReason,jdbcType=VARCHAR},
+			</if>
+		</trim>
+
+	</select>
+
+	<select id="findById" resultType="PmsLanguage">
+			select * from pms_language where guestLanguage =  #{guestLanguage,jdbcType=VARCHAR}
+	</select>
+
+	<select id="defaultLanguage" resultType="PmsLanguage">
+			select * from pms_language where langLabel='English'
+	</select>
+</mapper>

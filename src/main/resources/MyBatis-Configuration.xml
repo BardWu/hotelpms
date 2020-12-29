@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration PUBLIC 
+    "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+     <typeAliases>
+        <typeAlias alias="PmsLogRecord" type="com.networks.pms.bean.model.PmsLogRecord"/>
+        <typeAlias alias="CloudMessage" type="com.networks.pms.bean.model.CloudMessage"/>
+        <typeAlias alias="PmsLanguage" type="com.networks.pms.bean.model.PmsLanguage"/>
+        <typeAlias alias="ResendMessage" type="com.networks.pms.bean.model.ResendMessage"/>
+        <typeAlias alias="CloudRequest" type="com.networks.pms.bean.model.CloudRequest"/>
+         <typeAlias alias="HotelRequest" type="com.networks.pms.bean.model.HotelRequest"/>
+     </typeAliases>
+
+</configuration>

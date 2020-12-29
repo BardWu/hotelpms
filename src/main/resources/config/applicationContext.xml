@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+  <!-- 自动扫描组件，这里要把controler下面的 controller去除，他们是在spring3-servlet.xml中配置的，如果不去除会影响事务管理的   -->
+  <context:component-scan base-package="com.networks.pms">
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+  </context:component-scan>
+<!--定时任务-->
+  <task:annotation-driven/>
+
+  <import resource="spring-dao.xml"/>
+
+  <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+   <!-- <property name="location" value="/WEB-INF/classes/config/jdbc.properties" />-->
+    <property name="locations">
+      <array>
+        <value>/WEB-INF/classes/config/jdbc.properties</value>
+        <value>/WEB-INF/classes/config/sysconf.properties</value>
+      </array>
+    </property>
+  </bean>
+
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <property name="driverClass" value="${c3p0.mysql.driver}" />
+    <property name="jdbcUrl" value="${c3p0.mysql.url}" />
+    <property name="user" value="${c3p0.mysql.username}" />
+    <property name="password" value="${c3p0.mysql.password}" />
+    <property name="initialPoolSize" value="${c3p0.mysql.initialPoolSize}"></property>
+    <property name="minPoolSize" value="${c3p0.mysql.minPoolSize}"></property>
+    <property name="maxPoolSize" value="${c3p0.mysql.maxPoolSize}"></property>
+    <property name="maxIdleTime" value="${c3p0.mysql.maxIdleTime}"></property>
+    <property name="acquireIncrement" value="${c3p0.mysql.acquireIncrement}"></property>
+    <property name="idleConnectionTestPeriod" value="${c3p0.mysql.idleConnectionTestPeriod}"></property>
+    <property name="acquireRetryAttempts" value="${c3p0.mysql.acquireRetryAttempts}"></property>
+    <property name="testConnectionOnCheckout" value="${c3p0.mysql.testConnectionOnCheckout}"></property>
+    <property name="testConnectionOnCheckin" value="${c3p0.mysql.testConnectionOnCheckin}"></property>
+    <property name="preferredTestQuery" value="${c3p0.mysql.preferredTestQuery}"></property>
+  </bean>
+
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="configLocation" value="classpath:MyBatis-Configuration.xml" />
+    <property name="mapperLocations">
+      <list>
+        <value>classpath:mybatis_mapper/*.xml</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg index="0" ref="sqlSessionFactory" />
+  </bean>
+
+  <!--使 AspjectJ 注解起作用的配置-->
+  <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
+
+</beans>

@@ -1,0 +1,298 @@
+@charset "utf-8";
+ div,ul,li,span{margin:0px;padding:0px;}
+ body{ padding:0; margin:0 auto; font-size: 14px; font-family:"微软雅黑";}
+
+.c-float{clear:both;}
+.l-float{float: left;}
+.r-float{float:right;}
+.hide{display: none;}
+.show{display: block;}
+
+ .padding_left{padding-left:55px;}
+
+ .btn-width{width:85px}
+ 
+ .cursor{
+      cursor:pointer;
+ }
+
+.title-tag{
+    margin:0px;
+    height:40px;
+    width:100%;
+    background-image: url('../../images/jian_bian_tiao.jpg');
+    background-repeat: repeat-x;
+}
+.title-tag .title-list{
+    height:40px;
+    line-height: 40px;
+    padding-left:20px;
+}
+.title-tag .title-list ul{
+    list-style: none;
+}
+.title-tag .title-list ul li{
+    color: #878787;
+    float: left;
+    margin-right: 6px;
+}
+
+.title-tag .title-list .click-text{
+    color: #428bca;
+    cursor:pointer;
+}
+
+.title-tag .title-list .select-text {
+    color: #08223b;
+    font-weight: bold;
+}
+.title-tag .title-list ul li .icon-span{
+    font-size: 12px;
+    color:#878787;
+}
+.margin-left-20{margin-left:20px;}
+.margin-right-20{margin-right:20px;}
+.margin-top-20{margin-top:20px;}
+.margin-bottom-20{margin-bottom:20px;}
+.margin-right-10{margin-right:10px;}
+
+.search-area ul{
+   list-style: none;
+   margin:0px;
+   padding:0px;
+   list-style: none;
+   font-family:微软雅黑;
+   font-size : 14px;
+   font-weight : 600;
+   color : #6c6c6c;
+}
+.search-area ul li{
+       margin:0px 20px 0px 0px;
+       float: left;
+}
+.search-area ul li span{
+     margin:0px 5px 0px 0px;
+     padding:0px; float: left;
+}
+.search-area .text-desc{
+     padding-top:5px;
+     padding-right:5px;
+}
+.search-area ul li input{
+     width:120px; height:33px;
+     line-height:30px;
+     margin-top:0px;
+     font-weight: normal;
+
+}
+.search-area ul li .input{
+     border:1px solid #cccccc;
+     box-shadow:none;
+     webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+     border-radius: 3px;
+     padding-left:5px;
+}
+.search-area ul li select{
+    width:120px;height:33px;
+    line-height:30px;
+    border:1px solid #cccccc;
+    box-shadow:none;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.search-area ul li .loading {
+    height:18px;
+    background:url(../../images/loading3.gif) no-repeat 0px 3px;
+    background-size:15px 15px;
+}
+
+.search-area ul li .loading span{margin-left:16px;}
+
+.table-area{
+
+  font-size: 14px;
+  font-family:微软雅黑;
+  margin-top:20px;
+
+}
+
+.table-area table thead{
+      color:#37363e;
+}
+.table-area table .custom-odd-bg{
+    color: #4a4a4a;
+}
+
+.table-area table .custom-odd-bg tr:nth-child(odd){
+    background-color: #f5f5f5;
+}
+
+.table-area .table-hover>tbody>tr:hover {
+    background-color: #D8D8D8;
+}
+
+.table-area .btn-add{float:left;color:#428bca; cursor:pointer; margin:0px 0px 0px 5px;}
+
+.page-area{text-align: center;}
+.page-area ul{
+    width:460px;
+    margin: 0px auto;
+}
+.page-area ul li{
+    list-style:none;
+    margin-left:20px;
+    float: left;
+    line-height:30px;
+    cursor: pointer;
+}
+.page-area ul .display-num{
+     width:60px;
+     height:30px;
+}
+
+.page-area ul .arrow{
+    font-weight:bold;
+    font-size:16px;
+    width:30px;
+    height:30px;
+    background-color: #f5f7f8;
+}
+.page-area ul .arrow_left{}
+.page-area ul .page_current{color:#878787;font-size:16px;width:30px; height:30px;}
+.page-area ul .arrow_right{}
+.page-area ul .lisum{color:#878787;background-color: #f5f7f8; width:100px;line-height:30px;}
+
+.page-area ul .btn-color{
+    color:#848484;
+}
+.page-area ul .btn-disable{
+    color:#d2d7dd;
+}
+/*#divTable table thead{background-color:#F8F8F8;color:#356988;}*/
+
+/*
+
+#errorId{color: red;}
+.selectFont{color:#498EB8; font-size: 14px;font-family:微软雅黑;}
+.ver_hcmsIoc {
+      border:red solid 0px;
+      width:15px;height:15px;
+      background:url('../images/hcms_ioc.jpg') no-repeat;
+      background-position:-172px -65px;
+      margin:0px 8px 0px 0px;
+      padding:0px;
+      display: inline-block;
+      vertical-align: middle;
+  }
+  .ver_error{
+     margin-top:10px; color:red; padding:0px;
+  }
+  .marginL{margin-left:15px;}
+  .ver_font_color{
+     color:red;
+  }
+  .ver_border{
+     border:red solid 1px;
+  }
+  table tr .h_img{
+      cursor:pointer;
+      width:50px;
+      height:30px;
+  }
+
+  table tr .h_i{
+
+     cursor:pointer;
+     margin-top:8px;
+  }
+
+  .textLeft{text-align: left;}
+  .textRight{text-align: right;}
+  !*页面标题导航栏  *!
+   .title_tag{
+     margin:0px;border:red solid 0px; height:40px; width:100%; background-image: url('../images/jian_bian_tiao.jpg'); background-repeat: repeat-x;
+   }
+  .title_tag .div_padding{padding-top:10px; padding-left:20px;}
+  .title_tag .div_padding .text_level_1{color: #878787;}
+  .title_tag .div_padding .text_level_2{color: #428bca; cursor:pointer;}
+  .title_tag .div_padding ul li{list-style: none; float: left;}
+  .title_tag .div_padding .xline{color: #878787;margin:0px 5px;}
+  .btn_add_span{float:left;color:#428bca; cursor:pointer; margin:0px 0px 0px 5px;}
+  .btn_add_span img{margin-top:-3px; margin-right:5px;}
+
+
+
+  input[type="text"]:focus,
+  input[type="password"]:focus
+        {
+         color:#6c6c6c;
+         outline: 0px;
+         -webkit-box-shadow:none;
+            -moz-box-shadow: none;
+                 box-shadow: none;
+  }
+  .from-select{height:33px; line-height:30px;border:1px solid #cccccc; box-shadow:none;webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
+
+
+
+  #previewModal.in.fade.modal {
+       top : 20%;
+  }
+
+  #selectMultiple .selectDiv{
+     border: solid 0px red;
+     width: 220px;
+     float: left;
+  }
+  #selectMultiple ul{
+    margin:70px 0px 0px 0px;
+    list-style: none;
+    text-align:center;
+    border: solid 0px red;
+  }
+
+  #selectMultiple ul li{
+    margin:20px 0px 10px 0px;
+  }
+  .text_font12{font-size: 12px;}
+
+  .marginL15{margin-left:15px;}
+  .marginT15{margin-top:15px;}
+  .marginR15{margin-right:15px;}
+  .marginB15{margin-bottom:15px;}
+
+  .marginL10{margin-left:10px;}
+  .marginT10{margin-top:10px;}
+  .marginR10{margin-right:10px;}
+  .marginB10{margin-bottom:10px;}
+
+  .marginR5{margin-right:10px;}
+  .marginB5{margin-bottom:5px;}
+
+
+
+
+  .fileImg{
+          width: 72px; height: 71px; margin-bottom:5px; cursor:pointer
+  }
+  .fileloadImg{
+          width: 50px; height: 50px; margin-bottom:5px; cursor:pointer
+  }
+  .fileImgx{
+          float: left; font-size: 20px;font-weight: bold; border:red solid 0px; color: red; margin:0px 0px 0px -1px;cursor: pointer; z-index: 1;
+  }
+  .fileImgDiv{float: left; width:72px; height:71px; margin:8px 0px 2px 0px; }
+
+!*我的工单管理页面通用样式*!
+.work-order-panel{
+     width:400px;
+     height:700px;
+     margin:15px;
+     float: left;
+}*/
+
+ 
+ 

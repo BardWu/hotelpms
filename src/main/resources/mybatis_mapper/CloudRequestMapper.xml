@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="CloudRequest">
+    <sql id="selectAll">
+			id,
+			uuid,
+			oriCloudRequest,
+			tranCloudRequest,
+			oriWorkSystemResponse,
+			tranWorkSystemResponse,
+			requestType,
+			status,
+			requestTime,
+			sendWorkSystemTime,
+			responseTime,
+			error
+
+    </sql>
+	<!--check in-->
+	<insert id="insert" parameterType="CloudRequest">
+		insert into pms_cloud_request
+			(
+			uuid,
+			oriCloudRequest,
+			tranCloudRequest,
+			requestType,
+			requestTime,
+			status,
+			pid,
+			apiKey,
+			type,
+			oriWorkSystemResponse,
+			tranWorkSystemResponse,
+			responseTime,
+			sendWorkSystemTime
+			)
+			values(
+			#{uuid,jdbcType=VARCHAR},
+			#{oriCloudRequest,jdbcType=VARCHAR},
+			#{tranCloudRequest,jdbcType=VARCHAR},
+			#{requestType,jdbcType=VARCHAR},
+			#{requestTime,jdbcType=VARCHAR},
+			#{status,jdbcType=VARCHAR},
+			#{pid,jdbcType=VARCHAR},
+			#{apiKey,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{oriWorkSystemResponse,jdbcType=VARCHAR},
+			#{tranWorkSystemResponse,jdbcType=VARCHAR},
+			#{responseTime,jdbcType=VARCHAR},
+			#{sendWorkSystemTime,jdbcType=VARCHAR}
+			)
+	</insert>
+
+	<update id="update" parameterType="Map">
+		update pms_cloud_request
+		<trim prefix="set"  suffixOverrides=",">
+			<if test="oriWorkSystemResponse !=null and oriWorkSystemResponse != ''">
+				oriWorkSystemResponse= #{oriWorkSystemResponse,jdbcType=VARCHAR},
+			</if>
+			<if test="tranWorkSystemResponse !=null and tranWorkSystemResponse != ''">
+				tranWorkSystemResponse=#{tranWorkSystemResponse,jdbcType=VARCHAR},
+			</if>
+			<if test="status !=null and status != ''">
+				status=#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="sendWorkSystemTime !=null and sendWorkSystemTime != ''">
+				sendWorkSystemTime=#{sendWorkSystemTime,jdbcType=VARCHAR},
+			</if>
+			<if test="workSystemResponseTime !=null and workSystemResponseTime != ''">
+				workSystemResponseTime=#{workSystemResponseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="responseTime !=null and responseTime != ''">
+				responseTime=#{responseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="error !=null and error != ''">
+				error=#{error,jdbcType=VARCHAR},
+			</if>
+			<if test="invalid !=null and invalid != ''">
+				invalid=#{invalid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+		where uuid = #{uuid,jdbcType=VARCHAR}
+	</update>
+
+	<select id="findById" resultType="CloudRequest">
+			select * from pms_cloud_request where uuid =  #{uuid,jdbcType=VARCHAR}
+	</select>
+
+	<select id="find"  parameterType="CloudRequest" resultType="CloudRequest">
+		select <include refid="selectAll" /> from pms_cloud_request
+		<trim prefix="where"   prefixOverrides="and">
+			<if test="uuid !=null and uuid !=''">
+				and uuid = #{uuid}
+			</if>
+			<if test="status !=null and status !=''">
+				and status = #{status}
+			</if>
+			<if test="invalid !=null and invalid !=''">
+				and invalid  = #{invalid}
+			</if>
+		</trim>
+	</select>
+
+
+	<select id="findByPaging"  parameterType="Map" resultType="CloudRequest">
+			select <include refid="selectAll" /> from pms_cloud_request
+		<trim prefix="where"   prefixOverrides="and">
+			<if test="uuid !=null and uuid !=''">
+				 and uuid like CONCAT('%',#{uuid},'%')
+			</if>
+			<if test="status !=null and status !=''">
+				and status = #{status}
+			</if>
+			<if test="requestType !=null and requestType !=''">
+				and requestType = #{requestType}
+			</if>
+			<if test="cloudBegTime !=null and cloudBegTime !=''">
+				and requestTime  <![CDATA[ >= ]]> #{cloudBegTime}
+			</if>
+			<if test="cloudEndTime !=null and cloudEndTime !=''">
+				and requestTime  <![CDATA[ <= ]]> #{cloudEndTime}
+			</if>
+		</trim>
+		ORDER BY id DESC limit #{offset},#{limit}
+	</select>
+	<select id="pagCount" resultType="java.lang.Integer" parameterType="Map">
+			select count(*) from pms_cloud_request
+			<trim prefix="where"  prefixOverrides="and">
+				<if test="uuid !=null and uuid !=''">
+					and uuid  like CONCAT('%',#{uuid},'%')
+				</if>
+				<if test="status !=null and status !=''">
+					and status = #{status}
+				</if>
+				<if test="requestType !=null and requestType !=''">
+					and requestType = #{requestType}
+				</if>
+				<if test="cloudBegTime !=null and cloudBegTime !=''">
+					and requestTime  <![CDATA[ >= ]]> #{cloudBegTime}
+				</if>
+				<if test="cloudEndTime !=null and cloudEndTime !=''">
+					and requestTime  <![CDATA[ <= ]]> #{cloudEndTime}
+				</if>
+		</trim>
+	</select>
+	<select id="getSendMessage" resultType="CloudRequest">
+			select uuid, tranCloudRequest ,pid,apiKey,type FROM pms_cloud_request WHERE status ='0'
+	</select>
+</mapper>

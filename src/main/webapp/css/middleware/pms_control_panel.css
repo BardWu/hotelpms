@@ -1,0 +1,121 @@
+body,
+html {
+    background-color: #ededed;
+    height: 100%;
+    overflow: hidden;
+}
+
+.div-status {
+    text-align: right;
+    padding-right: 50px;
+}
+
+.div-console {
+    overflow-y: auto;
+    background-color: #ffffff;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.div-console>div {
+    margin: 10px;
+}
+
+.msg-status {
+    margin-left: 6px;
+}
+
+.rotate {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+    -webkit-animation: rotate 3s linear infinite;
+    -moz-animation: rotate 3s linear infinite;
+    -o-animation: rotate 3s linear infinite;
+    animation: rotate 3s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-moz-keyframes rotate {
+    from {
+        -moz-transform: rotate(0deg)
+    }
+    to {
+        -moz-transform: rotate(359deg)
+    }
+}
+
+@-o-keyframes rotate {
+    from {
+        -o-transform: rotate(0deg)
+    }
+    to {
+        -o-transform: rotate(359deg)
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(359deg)
+    }
+}
+.hide{
+    display: none;
+}
+.msg-status{
+    background:red;
+    font-size:20px;
+    color:white;
+}
+.fixed-table-body{height:auto !important}
+/*设置port*/
+#opera_open,#fcs_open{
+    width: 70px;
+    height: 25px;
+    border-radius: 15px;
+    position: relative;
+}
+
+#opera_close,#fcs_close{
+    width: 37px;
+    height: 21px;
+    border-radius: 10px;
+    position: absolute;
+    background: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+
+.open1 {
+    background: rgba(0, 184, 0, 0.8);
+}
+
+.open2 {
+    top: 2px;
+    right: 1px;
+}
+
+.close1 {
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-left: transparent;
+}
+
+.close2 {
+    left: 0px;
+    top: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+/*设置port*/

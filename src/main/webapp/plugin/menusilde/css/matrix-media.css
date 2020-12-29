@@ -1,0 +1,42 @@
+/* body {
+	background:#2E363F;
+} */
+
+#sidebar > ul > li {
+	border-bottom: 1px solid #cac7cb; /* border-bottom: 1px solid #999999; */
+}
+
+#sidebar > ul > li.active a{ color:#fff; text-decoration:none;}
+
+#sidebar > ul > li > a > .label {
+	background-color:#F66;
+}
+#sidebar > ul > li > a:hover {
+	background-color: #d2d7dd; color:#4a4a4a;
+}
+#sidebar > ul li ul {
+	background-color: #e6eaee;
+}
+
+#sidebar > ul li ul li a{ color:#939da8}
+#sidebar > ul li ul li a:hover, #sidebar > ul li ul li.active a {
+	color: #4a4a4a;
+	background-color: #d2d7dd; /*ѡ��һ���Ӳ˵���ʱ��䱳��ɫ*/
+	
+}
+
+#sidebar .liactiveborder{
+	border-left:#888888 solid 5px;
+}
+
+.dropdown-menu li a:hover, .dropdown-menu .active a, .dropdown-menu .active a:hover {
+    color: #4a4a4a;
+}
+#sidebar > ul > li > a > .img_home{width:16px;height:16px; margin:-5px 0px 0px 0px;}
+#sidebar > ul > li > a > .img_hotel_data{width:13px;height:12px; margin:-4px 6px 0px 0px;}
+#sidebar > ul > li > a > .img_job_order{width:13px;height:13px; margin:-5px 6px 0px 0px;}
+#sidebar > ul > li > a > .img_report{width:13px;height:12px; margin:-4px 6px 0px 0px;}
+#sidebar > ul > li > a > .img_help{width:15px;height:15px; margin:-4px 6px 0px 0px;}
+#sidebar > ul > li > ul li a > .img_child{width:4px;height:7px; margin:-4px 10px 0px 0px;}
+#sidebar > ul > li > a > .img_close{width:12px;height:7px; margin:5px 6px 0px 0px; float:right;}
+

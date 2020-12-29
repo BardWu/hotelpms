@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HotelRequest">
+
+
+    <select id="findById" resultType="HotelRequest">
+			select * from pms_hotel_request where uuid =  #{uuid,jdbcType=VARCHAR}
+	</select>
+
+    <sql id="selectAll">
+        id,
+        uuid,
+        oriHotelRequest,
+        tranHotelRequest,
+        msgType,
+        acceptTime,
+        sendCloudTime,
+         status,
+         error,
+         portType,
+         sendCloudRequest
+	</sql>
+
+    <insert id="insert" parameterType="HotelRequest">
+		insert into pms_hotel_request(portType,uuid,oriHotelRequest,tranHotelRequest,msgType,acceptTime,sendCloudTime,status,error,sendCloudRequest)
+			values (
+				#{portType,jdbcType=VARCHAR},
+				#{uuid,jdbcType=VARCHAR},
+				#{oriHotelRequest,jdbcType=VARCHAR},
+				#{tranHotelRequest,jdbcType=VARCHAR},
+				#{msgType,jdbcType=VARCHAR},
+				#{acceptTime,jdbcType=VARCHAR},
+				#{sendCloudTime,jdbcType=VARCHAR},
+				#{status,jdbcType=VARCHAR},
+				#{error,jdbcType=VARCHAR},
+				#{sendCloudRequest,jdbcType=VARCHAR}
+			)
+	</insert>
+    <select id="findByPaging"  parameterType="Map" resultType="HotelRequest">
+        select <include refid="selectAll" /> from pms_hotel_request
+        <trim prefix="where"  prefixOverrides="and">
+            <if test="uuid !=null and uuid !=''">
+                and uuid  like CONCAT('%',#{uuid},'%')
+            </if>
+            <if test="status !=null and status !=''">
+                and status = #{status}
+            </if>
+            <if test="msgType !=null and msgType !=''">
+                and msgType = #{msgType}
+            </if>
+            <if test="portType !=null and portType !=''">
+                and portType = #{portType}
+            </if>
+            <if test="cloudBegTime !=null and cloudBegTime !=''">
+                and acceptTime  <![CDATA[ >= ]]> #{cloudBegTime}
+            </if>
+            <if test="cloudEndTime !=null and cloudEndTime !=''">
+                and acceptTime  <![CDATA[ <= ]]> #{cloudEndTime}
+            </if>
+        </trim>
+        ORDER BY id DESC limit #{offset},#{limit}
+    </select>
+    <select id="pagCount" resultType="java.lang.Integer" parameterType="Map">
+			select count(*) from pms_hotel_request
+            <trim prefix="where"  prefixOverrides="and">
+                <if test="uuid !=null and uuid !=''">
+                    and uuid  like CONCAT('%',#{uuid},'%')
+                </if>
+                <if test="status !=null and status !=''">
+                    and status = #{status}
+                </if>
+                <if test="msgType !=null and msgType !=''">
+                    and msgType = #{msgType}
+                </if>
+                <if test="portType !=null and portType !=''">
+                    and portType = #{portType}
+                </if>
+                <if test="cloudBegTime !=null and cloudBegTime !=''">
+                    and acceptTime  <![CDATA[ >= ]]> #{cloudBegTime}
+                </if>
+                <if test="cloudEndTime !=null and cloudEndTime !=''">
+                    and acceptTime  <![CDATA[ <= ]]> #{cloudEndTime}
+                </if>
+            </trim>
+	</select>
+
+</mapper>

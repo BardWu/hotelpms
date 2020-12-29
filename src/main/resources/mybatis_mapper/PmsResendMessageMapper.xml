@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="ResendMessage">
+
+	<sql id="selectAll">
+		id,
+		type,
+		message,
+		depositTime,
+		resendResult,
+		error,
+		apiKey
+	</sql>
+
+	<insert id="insert" parameterType="ResendMessage">
+		insert into pms_resend_message(message,depositTime,type,apiKey)
+			values (
+				#{message,jdbcType=VARCHAR},
+				#{depositTime,jdbcType=VARCHAR},
+				#{type,jdbcType=VARCHAR},
+				#{apiKey,jdbcType=VARCHAR}
+			)
+	</insert>
+	<update id="update" parameterType="ResendMessage">
+			update pms_resend_message
+			set resendResult = #{resendResult,jdbcType=VARCHAR}
+			<if test="error !=null and error !=''">
+				,error=#{error,jdbcType=VARCHAR}
+			</if>
+			<if test="resendResult !=null and resendResult !=''">
+				,resendResult=#{resendResult,jdbcType=VARCHAR}
+			</if>
+			<if test="resendTotalTime !=-1">
+				,resendTotalTime=#{resendTotalTime,jdbcType=INTEGER}
+			</if>
+			where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+
+	<select id="getResendMsg" resultType="ResendMessage" >
+		select id,message,apiKey,resendTotalTime,type from pms_resend_message where type  in
+		<foreach collection="list" item="typeId" separator="," open="(" close=")">
+			#{typeId}
+		</foreach>
+		and  resendTotalTime &lt; 2 and resendResult !='1'
+	</select>
+
+
+	<select id="findByPaging"  parameterType="Map" resultType="ResendMessage">
+			select <include refid="selectAll" /> from pms_resend_message
+			<trim prefix="where"  prefixOverrides="and">
+				<if test="uuid !=null and uuid !=''">
+					and uuid = #{uuid}
+				</if>
+				<if test="status !=null and status !=''">
+					and resendResult = #{status}
+				</if>
+				<if test="requestType !=null and requestType !=''">
+					and type = #{requestType}
+				</if>
+			</trim>
+		ORDER BY id DESC limit #{offset},#{limit}
+	</select>
+	<select id="pagCount" resultType="java.lang.Integer" parameterType="Map">
+			select count(*) from  pms_resend_message
+			<trim prefix="where"  prefixOverrides="and">
+				<if test="uuid !=null and uuid !=''">
+					and uuid = #{uuid}
+				</if>
+				<if test="status !=null and status !=''">
+					and resendResult = #{status}
+				</if>
+				<if test="requestType !=null and requestType !=''">
+					and type = #{requestType}
+				</if>
+			</trim>
+
+	</select>
+
+</mapper>
